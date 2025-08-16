@@ -122,8 +122,8 @@ class DepthEstimator:
         return depth_map
     
     def get_object_distance(self, depth_map: np.ndarray, 
-                           bbox: Tuple[int, int, int, int],
-                           step_size: float = 0.75) -> float:
+                        bbox: Tuple[int, int, int, int],
+                        step_size: float = 0.75) -> float:
         """Calculate object distance from depth map"""
         try:
             x1, y1, x2, y2 = bbox
@@ -134,27 +134,25 @@ class DepthEstimator:
             x2, y2 = min(w, x2), min(h, y2)
             
             if x2 <= x1 or y2 <= y1:
-                return 3.0  # Default distance in steps
+                return 2.0  # Default distance
             
             # Extract depth values in bounding box
             roi_depth = depth_map[y1:y2, x1:x2]
             
-            # Use center region for more stable depth estimation
+            # Use center region for more stable measurement
             center_h, center_w = roi_depth.shape
-            pad_h, pad_w = center_h // 4, center_w // 4
-            
-            if center_h > 2 * pad_h and center_w > 2 * pad_w:
-                center_roi = roi_depth[pad_h:center_h-pad_h, pad_w:center_w-pad_w]
-                if center_roi.size > 0:
-                    # Use 25th percentile for more stable reading (excludes outliers)
-                    depth_value = np.percentile(center_roi, 25)
-                else:
-                    depth_value = np.median(roi_depth)
+            if center_h > 10 and center_w > 10:
+                # Use central 50% of the bounding box
+                margin_h, margin_w = center_h // 4, center_w // 4
+                center_roi = roi_depth[margin_h:center_h-margin_h, margin_w:center_w-margin_w]
+                
+                # Use median for robustness against outliers
+                median_depth = np.median(center_roi)
             else:
-                depth_value = np.median(roi_depth)
+                median_depth = np.median(roi_depth)
             
             # Convert to real-world distance
-            distance_meters = self._depth_to_distance(depth_value)
+            distance_meters = self._depth_to_distance(median_depth)
             
             # Convert to steps
             distance_steps = distance_meters / step_size
@@ -162,42 +160,35 @@ class DepthEstimator:
             # Round to reasonable precision
             distance_steps = round(distance_steps, 1)
             
-            return max(0.5, distance_steps)  # Minimum 0.5 steps
+            return max(0.3, distance_steps)  # Minimum 0.3 steps
             
         except Exception as e:
             logger.error(f"Distance calculation failed: {e}")
-            return 3.0
+            return 2.0
     
     def _depth_to_distance(self, depth_value: float) -> float:
-        """Convert normalized depth value to real-world distance"""
+        """Convert MiDaS depth value to real-world distance"""
         try:
-            # Clamp depth value to valid range
-            depth_value = max(0.0, min(1.0, depth_value))
+            # MiDaS outputs inverse depth, so LARGER values = CLOSER objects
+            # We need to invert this relationship
             
-            # Use lookup table for better accuracy
-            for (min_depth, max_depth), distance in self.distance_map.items():
-                if min_depth <= depth_value < max_depth:
-                    return distance
-            
-            # Fallback: inverse relationship with scaling
-            if depth_value < 0.05:
-                return self.min_distance
-            elif depth_value > 0.95:
+            if depth_value <= 0:
                 return self.max_distance
-            else:
-                # Logarithmic mapping for better distribution
-                # Smaller depth values (closer to 0) = closer objects
-                # Larger depth values (closer to 1) = farther objects
-                distance = self.min_distance + (1 - depth_value) * (self.max_distance - self.min_distance)
-                
-                # Apply logarithmic scaling for more realistic distances
-                distance = self.min_distance + (distance - self.min_distance) ** 1.5
-                
-                return min(self.max_distance, max(self.min_distance, distance))
+            
+            # Simple inverse relationship - the key fix
+            # Higher depth values should give SMALLER distances
+            base_distance = 5.0  # Base calibration distance in meters
+            distance = base_distance / (depth_value + 0.1)  # Add small value to avoid division by zero
+            
+            # Clamp to reasonable range
+            distance = max(self.min_distance, min(distance, self.max_distance))
+            
+            return distance
             
         except Exception as e:
             logger.error(f"Depth conversion failed: {e}")
             return 2.0
+
     
     def get_distance_category(self, distance_steps: float) -> str:
         """Get distance category for better user feedback"""

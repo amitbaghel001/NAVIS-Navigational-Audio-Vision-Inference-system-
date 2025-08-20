@@ -3042,3 +3042,105 @@
 2025-08-17 10:27:32.583 | INFO     | core.audio_processor:stop:307 - Audio processor stopped
 2025-08-17 10:27:32.584 | INFO     | __main__:stop:407 - VisionGuide AI stopped
 2025-08-17 10:27:32.584 | INFO     | __main__:main:555 - VisionGuide AI shutdown complete
+2025-08-17 11:54:29.677 | INFO     | core.object_detector:__init__:33 - Object detector initialized on cpu
+2025-08-17 11:54:29.677 | INFO     | core.calibration_system:load_calibration:296 - Loaded 18 calibration points and 2 models
+2025-08-17 11:54:29.677 | INFO     | core.calibration_system:__init__:45 - Smart depth calibrator initialized
+2025-08-17 11:54:33.976 | INFO     | core.depth_estimator:_load_model:66 - Depth estimation model loaded: MiDaS_small
+2025-08-17 11:54:33.976 | INFO     | core.scene_tracker:__init__:35 - Scene tracker initialized
+2025-08-17 11:54:34.160 | INFO     | core.audio_processor:_initialize_tts:76 - TTS engine initialized successfully
+2025-08-17 11:54:34.626 | INFO     | core.audio_processor:_initialize_speech_recognition:86 - Adjusting for ambient noise...
+2025-08-17 11:54:35.690 | INFO     | core.audio_processor:_initialize_speech_recognition:89 - Speech recognition initialized
+2025-08-17 11:54:35.690 | INFO     | core.audio_processor:__init__:60 - Audio processor initialized
+2025-08-17 11:54:35.690 | WARNING  | core.object_detector:__init__:179 - Face recognition not available: cannot access local variable 'MEDIAPIPE_AVAILABLE' where it is not associated with a value
+2025-08-17 11:54:35.690 | INFO     | core.calibration_system:load_calibration:296 - Loaded 18 calibration points and 2 models
+2025-08-17 11:54:35.690 | INFO     | core.calibration_system:__init__:45 - Smart depth calibrator initialized
+2025-08-17 11:54:35.690 | INFO     | __main__:__init__:49 - VisionGuide AI initialized successfully
+2025-08-17 11:54:36.022 | INFO     | __main__:start_camera:63 - Camera started successfully
+2025-08-17 11:54:36.022 | INFO     | core.audio_processor:_audio_worker:155 - Audio worker started
+2025-08-17 11:54:36.022 | INFO     | core.audio_processor:start:294 - Audio processor started
+2025-08-17 11:54:36.022 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI audio test. Audio is working correctly.
+2025-08-17 11:54:43.856 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI Smart Mode is ready. I will only announce when things change.
+2025-08-17 11:54:50.185 | INFO     | __main__:start:446 - VisionGuide AI started
+2025-08-17 11:54:50.189 | INFO     | __main__:main:600 - VisionGuide AI Smart Mode is running.
+2025-08-17 11:54:51.611 | INFO     | __main__:run_detection_loop:169 - Smart announcement: There's a person 2 steps away to your left
+2025-08-17 11:54:51.611 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: There's a person 2 steps away to your left
+2025-08-17 11:54:58.649 | INFO     | __main__:run_detection_loop:169 - Smart announcement: The person is moving away
+2025-08-17 11:54:58.649 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: The person is moving away
+2025-08-17 11:55:06.014 | INFO     | __main__:run_detection_loop:169 - Smart announcement: There's a person 2 steps away ahead
+2025-08-17 11:55:06.014 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: There's a person 2 steps away ahead
+2025-08-17 11:55:21.096 | INFO     | __main__:run_detection_loop:177 - Scene summary: I can see a person 2 steps away
+2025-08-17 11:55:21.096 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: Scene update: I can see a person 2 steps away
+2025-08-17 11:55:51.352 | INFO     | __main__:run_detection_loop:177 - Scene summary: I can see a person 2 steps away
+2025-08-17 11:55:51.352 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: Scene update: I can see a person 2 steps away
+2025-08-17 11:55:51.800 | INFO     | __main__:run_detection_loop:169 - Smart announcement: There's a person 2 steps away to your left
+2025-08-17 11:55:57.229 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: There's a person 2 steps away to your left
+2025-08-17 11:56:02.467 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Face detection mode. Please look at the camera and press SPACE when ready
+2025-08-17 11:56:50.711 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Failed to add person to face recognition
+2025-08-17 11:56:55.770 | INFO     | __main__:run_detection_loop:177 - Scene summary: I can see a person 2 steps away
+2025-08-17 11:56:55.772 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: Scene update: I can see a person 2 steps away
+2025-08-17 11:56:55.786 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Auto-announce disabled
+2025-08-17 11:56:58.871 | INFO     | __main__:run_detection_loop:282 - Auto-announce disabled
+2025-08-17 11:57:06.411 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Face detection mode. Please look at the camera and press SPACE when ready
+2025-08-17 11:57:48.156 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Failed to add person to face recognition
+2025-08-17 11:57:53.342 | INFO     | __main__:run_detection_loop:177 - Scene summary: I can see a person 2 steps away
+2025-08-17 11:57:53.342 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: Scene update: I can see a person 2 steps away
+2025-08-17 11:57:53.355 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Auto-announce enabled
+2025-08-17 11:57:56.343 | INFO     | __main__:run_detection_loop:282 - Auto-announce enabled
+2025-08-17 11:58:00.958 | INFO     | __main__:run_detection_loop:249 - Quit key pressed
+2025-08-17 11:58:01.051 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI is shutting down. Goodbye.
+2025-08-17 11:58:06.666 | INFO     | __main__:stop_camera:75 - Camera stopped
+2025-08-17 11:58:06.670 | INFO     | core.audio_processor:stop_speaking:277 - Speech stopped and queue cleared
+2025-08-17 11:58:07.654 | INFO     | core.audio_processor:_audio_worker:200 - Audio worker stopped
+2025-08-17 11:58:07.654 | INFO     | core.audio_processor:stop:307 - Audio processor stopped
+2025-08-17 11:58:07.654 | INFO     | __main__:stop:470 - VisionGuide AI stopped
+2025-08-17 11:58:07.657 | INFO     | __main__:main:618 - VisionGuide AI shutdown complete
+2025-08-17 12:12:43.667 | INFO     | core.object_detector:__init__:34 - Object detector initialized on cpu
+2025-08-17 12:12:43.667 | INFO     | core.calibration_system:load_calibration:296 - Loaded 18 calibration points and 2 models
+2025-08-17 12:12:43.667 | INFO     | core.calibration_system:__init__:45 - Smart depth calibrator initialized
+2025-08-17 12:12:51.942 | INFO     | core.depth_estimator:_load_model:66 - Depth estimation model loaded: MiDaS_small
+2025-08-17 12:12:51.942 | INFO     | core.scene_tracker:__init__:35 - Scene tracker initialized
+2025-08-17 12:12:52.409 | INFO     | core.audio_processor:_initialize_tts:76 - TTS engine initialized successfully
+2025-08-17 12:12:53.579 | INFO     | core.audio_processor:_initialize_speech_recognition:86 - Adjusting for ambient noise...
+2025-08-17 12:12:54.702 | INFO     | core.audio_processor:_initialize_speech_recognition:89 - Speech recognition initialized
+2025-08-17 12:12:54.702 | INFO     | core.audio_processor:__init__:60 - Audio processor initialized
+2025-08-17 12:12:54.709 | WARNING  | core.object_detector:__init__:180 - Face recognition not available: cannot access local variable 'MEDIAPIPE_AVAILABLE' where it is not associated with a value
+2025-08-17 12:12:54.709 | INFO     | core.calibration_system:load_calibration:296 - Loaded 18 calibration points and 2 models
+2025-08-17 12:12:54.709 | INFO     | core.calibration_system:__init__:45 - Smart depth calibrator initialized
+2025-08-17 12:12:54.709 | INFO     | __main__:__init__:49 - VisionGuide AI initialized successfully
+2025-08-17 12:12:55.310 | INFO     | __main__:start_camera:63 - Camera started successfully
+2025-08-17 12:12:55.315 | INFO     | core.audio_processor:_audio_worker:155 - Audio worker started
+2025-08-17 12:12:55.315 | INFO     | core.audio_processor:start:294 - Audio processor started
+2025-08-17 12:12:55.315 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI audio test. Audio is working correctly.
+2025-08-17 12:13:03.442 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI Smart Mode is ready. I will only announce when things change.
+2025-08-17 12:13:10.403 | INFO     | __main__:start:481 - VisionGuide AI started
+2025-08-17 12:13:10.419 | INFO     | __main__:main:635 - VisionGuide AI Smart Mode is running.
+2025-08-17 12:13:13.923 | INFO     | __main__:run_detection_loop:169 - Smart announcement: There's a person 2 steps away to your left
+2025-08-17 12:13:13.923 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: There's a person 2 steps away to your left
+2025-08-17 12:13:27.951 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Face detection mode. Please look directly at the camera and press SPACE when ready
+2025-08-17 12:13:53.990 | INFO     | core.object_detector:add_known_face:200 - Attempting to add face for Amaan
+2025-08-17 12:13:53.990 | INFO     | core.object_detector:add_known_face:201 - Image shape: (480, 640, 3)
+2025-08-17 12:13:53.990 | INFO     | core.object_detector:add_known_face:202 - Image dtype: uint8
+2025-08-17 12:13:53.990 | ERROR    | core.object_detector:add_known_face:206 - Face recognition system not available
+2025-08-17 12:13:53.990 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Failed to add person. Please ensure your face is clearly visible and try again
+2025-08-17 12:14:01.707 | ERROR    | __main__:add_person_mode:376 - Failed to add person: Amaan
+2025-08-17 12:14:02.178 | INFO     | __main__:run_detection_loop:177 - Scene summary: I can see a person 2 steps away
+2025-08-17 12:14:02.186 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: Scene update: I can see a person 2 steps away
+2025-08-17 12:14:04.474 | INFO     | __main__:run_detection_loop:169 - Smart announcement: The person is moving away
+2025-08-17 12:14:07.646 | INFO     | core.audio_processor:_audio_worker:175 - Speaking: The person is moving away
+2025-08-17 12:14:26.509 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Face detection mode. Please look directly at the camera and press SPACE when ready
+2025-08-17 12:14:56.933 | INFO     | core.object_detector:add_known_face:200 - Attempting to add face for Amaan
+2025-08-17 12:14:56.933 | INFO     | core.object_detector:add_known_face:201 - Image shape: (480, 640, 3)
+2025-08-17 12:14:56.933 | INFO     | core.object_detector:add_known_face:202 - Image dtype: uint8
+2025-08-17 12:14:56.938 | ERROR    | core.object_detector:add_known_face:206 - Face recognition system not available
+2025-08-17 12:14:56.938 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: Failed to add person. Please ensure your face is clearly visible and try again
+2025-08-17 12:15:04.683 | ERROR    | __main__:add_person_mode:376 - Failed to add person: Amaan
+2025-08-17 12:16:13.928 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: No face recognition statistics available
+2025-08-17 12:16:18.803 | INFO     | __main__:show_face_stats:408 - Face recognition stats: {}
+2025-08-17 12:16:22.333 | INFO     | __main__:run_detection_loop:249 - Quit key pressed
+2025-08-17 12:16:22.400 | INFO     | core.audio_processor:speak_immediately:116 - Speaking: VisionGuide AI is shutting down. Goodbye.
+2025-08-17 12:16:27.937 | INFO     | __main__:stop_camera:75 - Camera stopped
+2025-08-17 12:16:27.938 | INFO     | core.audio_processor:stop_speaking:277 - Speech stopped and queue cleared
+2025-08-17 12:16:28.377 | INFO     | core.audio_processor:_audio_worker:200 - Audio worker stopped
+2025-08-17 12:16:28.381 | INFO     | core.audio_processor:stop:307 - Audio processor stopped
+2025-08-17 12:16:28.381 | INFO     | __main__:stop:505 - VisionGuide AI stopped
+2025-08-17 12:16:28.381 | INFO     | __main__:main:653 - VisionGuide AI shutdown complete

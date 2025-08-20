@@ -207,18 +207,20 @@ class VisionGuideAI:
                                 (x1, y2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
                 
                 # Add control instructions
+                # Update the control instructions to include the new help command
                 instructions = [
                     "VisionGuide AI - Smart Mode:",
                     "Q - Quit",
                     "S - Manual description",
                     "V - Voice command",
+                    "H - Voice help",  # ADD THIS
                     "R - Repeat last",
                     "T - Test audio",
                     "A - Toggle auto-announce",
                     "C - Current scene summary",
-                    "M - Manual calibration",      # ADD THIS
-                    "N - Calibration status",      # ADD THIS
-                    "X - Reset calibration",       # ADD THIS
+                    "M - Manual calibration",
+                    "N - Calibration status",
+                    "X - Reset calibration",
                     "SPACE - Stop talking"
                 ]
                 
@@ -257,8 +259,16 @@ class VisionGuideAI:
                         logger.info("Manual description triggered")
                         
                 elif key == ord('v') or key == ord('V'):
-                    # Voice command mode
-                    self.handle_voice_command(frame)
+                    # Enhanced voice command mode - PASS detected_objects
+                    if not self.audio_processor._is_listening:
+                        self.handle_voice_command(frame, detected_objects)  # ADD detected_objects HERE
+                    else:
+                        self.audio_processor.speak_immediately("Already listening, please wait")
+
+                elif key == ord('h') or key == ord('H'):
+                    # Voice help - list available commands
+                    help_text = "Available voice commands: What do you see, Repeat, Stop talking, Help me, Where am I, Volume up, Volume down, Calibrate, Status"
+                    self.audio_processor.speak_async(help_text, AudioPriority.HIGH)
                     
                 elif key == ord('r') or key == ord('R'):
                     # Repeat last description
@@ -319,24 +329,29 @@ class VisionGuideAI:
         return "gone_" in change_type or "new_" in change_type
 
     
-    def handle_voice_command(self, frame: np.ndarray):
-        """Handle voice command input"""
+    def handle_voice_command(self, frame: np.ndarray, detected_objects: list):
+        """Enhanced voice command handling with detected objects"""
         try:
-            # Show listening indicator
-            self.audio_processor.speak_immediately("Listening for command")
+            # Clear visual indication
+            self.audio_processor.speak_immediately("Listening... Speak your command now")
             
-            # Listen for command
-            command = self.audio_processor.listen_for_command()
+            # Listen for command with enhanced recognition
+            command = self.audio_processor.listen_for_command(timeout=6, phrase_limit=6)
             
             if command:
-                # Process command
+                logger.info(f"Voice command received: '{command}'")
+                
+                # Process command using smart pattern matching
                 action = self.audio_processor.process_voice_command(command)
                 
                 # Handle specific actions
                 if action == "describe_scene":
                     summary = self.scene_tracker.get_scene_summary()
-                    self.audio_processor.speak_async(summary, AudioPriority.HIGH)
-                    self.last_description = summary
+                    if summary and summary.strip():
+                        self.audio_processor.speak_async(summary, AudioPriority.HIGH)
+                        self.last_description = summary
+                    else:
+                        self.audio_processor.speak_immediately("I don't see anything specific right now")
                         
                 elif action == "repeat_last":
                     if self.last_description:
@@ -345,17 +360,32 @@ class VisionGuideAI:
                         self.audio_processor.speak_immediately("No previous description to repeat")
                         
                 elif action == "emergency":
-                    self.audio_processor.speak_immediately("Emergency mode activated. This feature will be implemented soon.")
+                    self.audio_processor.speak_immediately("Emergency mode activated. This feature will be available soon.")
                     
                 elif action == "get_location":
-                    self.audio_processor.speak_immediately("Location services will be implemented soon.")
+                    self.audio_processor.speak_immediately("Location services will be available soon.")
                     
+                elif action == "calibrate":
+                    if detected_objects:  # NOW THIS WILL WORK
+                        self.manual_calibration_mode(frame, detected_objects)
+                    else:
+                        self.audio_processor.speak_immediately("No objects visible for calibration")
+                        
+                elif action == "status":
+                    status = self.easy_calibrator.get_calibration_status()
+                    if status['is_calibrated']:
+                        self.audio_processor.speak_immediately("System is running normally with calibration active")
+                    else:
+                        self.audio_processor.speak_immediately("System is running normally, but no calibration is active")
+                        
             else:
-                self.audio_processor.speak_immediately("No command heard")
+                self.audio_processor.speak_immediately("I didn't hear any command. Please try again.")
                 
         except Exception as e:
             logger.error(f"Voice command error: {e}")
-            self.audio_processor.speak_immediately("Voice command failed")
+            self.audio_processor.speak_immediately("Voice command failed. Please try again.")
+
+
     
     def start(self):
         """Start the VisionGuide AI system"""

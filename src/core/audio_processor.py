@@ -52,44 +52,6 @@ class SmartVoiceCommandProcessor:
         r'give me details'
     ],
     
-    # Navigation commands
-    'repeat_last': [
-        r'repeat',
-        r'say again',
-        r'say that again',
-        r'repeat last',
-        r'what did you say',
-        r'could you repeat',
-        r'pardon',
-        r'excuse me',
-        r'i didn\'t catch that',
-        r'come again',
-        r'repeat that',
-        r'say it again',
-        r'one more time',
-        r'didn\'t hear you',
-        r'missed that'
-    ],
-    
-    # Control commands
-    'stop_talking': [
-        r'stop talking',
-        r'be quiet',
-        r'silence',
-        r'shut up',
-        r'stop speaking',
-        r'mute',
-        r'quiet',
-        r'hush',
-        r'stop',
-        r'enough',
-        r'pause',
-        r'stop now',
-        r'be silent',
-        r'no more',
-        r'that\'s enough'
-    ],
-    
     # Emergency commands
     'emergency': [
         r'help me',
@@ -541,13 +503,6 @@ class AudioProcessor:
         # Process commands with immediate responses
         if action == "describe_scene":
             self.speak_immediately("Getting scene description")
-            
-        elif action == "stop_talking":
-            self.stop_speaking()
-            self.speak_immediately("Speech stopped")
-            
-        elif action == "repeat_last":
-            self.speak_immediately("Repeating last message")
             
         elif action == "emergency":
             self.speak_immediately("Emergency mode activated")

@@ -209,19 +209,13 @@ class VisionGuideAI:
                 # Add control instructions
                 # Update the control instructions to include the new help command
                 instructions = [
-                    "VisionGuide AI - Smart Mode:",
+                    "VisionGuide AI - Ready:",
                     "Q - Quit",
-                    "S - Manual description",
+                    "D - Describe scene",
                     "V - Voice command",
-                    "H - Voice help",  # ADD THIS
-                    "R - Repeat last",
-                    "T - Test audio",
-                    "A - Toggle auto-announce",
-                    "C - Current scene summary",
-                    "M - Manual calibration",
-                    "N - Calibration status",
-                    "X - Reset calibration",
-                    "SPACE - Stop talking"
+                    "C - Calibrate distance",
+                    "I - Calibration info",
+                    "X - Reset calibration"
                 ]
                 
                 y_offset = 30
@@ -250,13 +244,6 @@ class VisionGuideAI:
                     self.should_exit = True
                     break
                     
-                elif key == ord('s') or key == ord('S'):
-                    # Manual scene description
-                    audio_description = self.process_frame(frame)
-                    if audio_description and audio_description.strip() != ".":
-                        self.last_description = audio_description
-                        self.audio_processor.speak_async(audio_description, AudioPriority.HIGH)
-                        logger.info("Manual description triggered")
                         
                 elif key == ord('v') or key == ord('V'):
                     # Enhanced voice command mode - PASS detected_objects
@@ -264,48 +251,20 @@ class VisionGuideAI:
                         self.handle_voice_command(frame, detected_objects)  # ADD detected_objects HERE
                     else:
                         self.audio_processor.speak_immediately("Already listening, please wait")
-
-                elif key == ord('h') or key == ord('H'):
-                    # Voice help - list available commands
-                    help_text = "Available voice commands: What do you see, Repeat, Stop talking, Help me, Where am I, Volume up, Volume down, Calibrate, Status"
-                    self.audio_processor.speak_async(help_text, AudioPriority.HIGH)
-                    
-                elif key == ord('r') or key == ord('R'):
-                    # Repeat last description
-                    if self.last_description:
-                        self.audio_processor.speak_async(self.last_description, AudioPriority.HIGH)
-                        logger.info("Repeating last description")
-                    else:
-                        self.audio_processor.speak_immediately("No previous description to repeat")
                         
-                elif key == ord('t') or key == ord('T'):
-                    # Test audio
-                    self.audio_processor.test_audio()
-                    
-                elif key == ord('a') or key == ord('A'):
-                    # Toggle auto-announce
-                    self.auto_announce_changes = not self.auto_announce_changes
-                    status = "enabled" if self.auto_announce_changes else "disabled"
-                    self.audio_processor.speak_immediately(f"Auto-announce {status}")
-                    logger.info(f"Auto-announce {status}")
-                    
+
+                # ADD THESE NEW CONTROLS AFTER THE SPACE KEY HANDLER:
                 elif key == ord('c') or key == ord('C'):
+                    # Manual calibration mode
+                    self.manual_calibration_mode(frame, detected_objects)
+
+                elif key == ord('d') or key == ord('D'):
                     # Current scene summary
                     summary = self.scene_tracker.get_scene_summary()
                     self.audio_processor.speak_async(summary, AudioPriority.HIGH)
                     logger.info(f"Manual scene summary: {summary}")
-                    
-                elif key == ord(' '):  # Space key
-                    # Stop talking
-                    self.audio_processor.stop_speaking()
-                    logger.info("Speech stopped by user")
 
-                # ADD THESE NEW CONTROLS AFTER THE SPACE KEY HANDLER:
-                elif key == ord('m') or key == ord('M'):
-                    # Manual calibration mode
-                    self.manual_calibration_mode(frame, detected_objects)
-
-                elif key == ord('n') or key == ord('N'):
+                elif key == ord('i') or key == ord('I'):
                     # Show calibration status
                     self.show_calibration_status()
 
@@ -353,11 +312,6 @@ class VisionGuideAI:
                     else:
                         self.audio_processor.speak_immediately("I don't see anything specific right now")
                         
-                elif action == "repeat_last":
-                    if self.last_description:
-                        self.audio_processor.speak_async(self.last_description, AudioPriority.HIGH)
-                    else:
-                        self.audio_processor.speak_immediately("No previous description to repeat")
                         
                 elif action == "emergency":
                     self.audio_processor.speak_immediately("Emergency mode activated. This feature will be available soon.")
@@ -398,12 +352,9 @@ class VisionGuideAI:
         # Start audio processor
         self.audio_processor.start()
         
-        # Test audio
-        self.audio_processor.test_audio()
-        time.sleep(2)
         
         # Welcome message
-        self.audio_processor.speak_immediately("VisionGuide AI Smart Mode is ready. I will only announce when things change.")
+        self.audio_processor.speak_immediately("Welcome to the VisionGuide AI . Press S for scene description, V for voice commands and C To Calibrate Distance.")
         
         # Start detection thread
         self.detection_thread = threading.Thread(target=self.run_detection_loop)

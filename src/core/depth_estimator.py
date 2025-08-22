@@ -160,6 +160,7 @@ class DepthEstimator:
             
             # Convert to steps
             distance_steps = distance_meters / step_size
+            distance_steps = distance_steps//2
             
             # Round to reasonable precision
             distance_steps = round(distance_steps, 1)

@@ -69,7 +69,7 @@ graph TD
 
 **1. Clone the Repository:**
 ```bash
-git clone https://github.com/Amaan3073/VisionGuide.git
+git clone https://github.com/amitbaghel001/nav
 cd VisionGuide
 ```
 

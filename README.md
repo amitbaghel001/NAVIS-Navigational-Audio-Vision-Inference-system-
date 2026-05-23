@@ -1,6 +1,6 @@
-# 🌟 NAVIS AI —Navigational Audio & Vision Inference System
+# 🌟 NAVIS AI — Navigational Audio & Vision Inference System
 
-> An advanced multimodal AI navigation and auditory assistance system for visually impaired individuals.
+> An AI-powered multimodal assistive navigation system enabling real-time scene understanding, voice interaction, and intelligent environmental awareness for visually impaired individuals.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-AI-blue?style=for-the-badge&logo=python"/>
@@ -28,18 +28,18 @@ to create an intelligent accessibility-focused AI system.
 # 🧭 Architecture Overview
 
 <p align="center">
-  <img src="./screenshots/architecture.png" width="900"/>
+  <img src="./screenshots/architecture.png" width="1000"/>
 </p>
 
 <p align="center">
-  <i>High-level workflow architecture of NAVIS AI</i>
+  <b>Real-time multimodal AI pipeline powering NAVIS AI</b>
 </p>
 
 ---
 
 # 🚀 Key Features
 
-## 👁️ Real-time Object Detection
+## 👁️ AI-Powered Object Detection
 Identifies surrounding obstacles and objects using **YOLOv8**, enabling continuous environmental awareness and safer navigation.
 
 ---
@@ -49,7 +49,7 @@ Accurately estimates obstacle distance using depth estimation models to help use
 
 ---
 
-## 🧠 Smart Scene Analyzer
+## 🧠 Intelligent Scene Understanding
 Periodically summarizes the environment by:
 - Tracking newly appearing objects
 - Detecting missing objects
@@ -62,7 +62,7 @@ Recognizes familiar individuals dynamically, helping users identify nearby frien
 
 ---
 
-## 🎤 Intelligent Voice Assistant
+## 🎤 Conversational Voice Assistant
 Interact seamlessly using voice commands for:
 - Scene descriptions
 - Calibration
@@ -81,7 +81,7 @@ Includes foundational support for:
 
 ---
 
-## 🖥️ Graphical Control Interface
+## 🖥️ Interactive Monitoring Dashboard
 Provides a local PyQt5-based GUI for:
 - Troubleshooting
 - Monitoring system status
@@ -195,23 +195,7 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-> On first launch, AI model weights may automatically download.
-
----
-
-# 📸 Screenshots
-
-> Add screenshots here:
-- Live Detection View
-- Depth Estimation Interface
-- Voice Assistant Panel
-- GUI Dashboard
-
-Example:
-
-```md
-![NAVIS Dashboard](./screenshots/dashboard.png)
-```
+> On first launch, AI model weights may automatically download automatically.
 
 ---
 
@@ -225,12 +209,13 @@ The project focuses on combining AI, computer vision, and real-time interaction 
 
 # 🔮 Future Improvements
 
-- Wearable smart-glass integration
-- Real-time GPS navigation
+- Smart wearable integration
 - Edge-device optimization
-- Multilingual voice assistant
-- Mobile deployment
-- AI-powered contextual assistance
+- Real-time GPS navigation assistance
+- Multilingual voice interaction
+- Context-aware AI guidance
+- Lightweight mobile deployment
+- AI-powered contextual memory system
 
 ---
 
@@ -251,7 +236,7 @@ AI/ML Developer passionate about:
 
 # ❤️ Final Note
 
-> “Empowering visually impaired individuals to navigate the world with greater independence, awareness, and confidence.”
+> “Building AI systems that transform accessibility into independence.”
 
 ---
 
